@@ -16,9 +16,12 @@ public class NumberSequence {
     }
 
     public NumberSequence(int howManyNumber, int minNumber, int maxNumber) {
+        numberList = new ArrayList<>();
+
         Random random = new Random();
         for (int i = 0; i < howManyNumber; i++) {
-            numberList.add(random.nextInt(minNumber, maxNumber + 1));
+           int addNumber = (random.nextInt(minNumber, maxNumber + 1));
+            numberList.add(addNumber);
         }
     }
 
@@ -28,7 +31,7 @@ public class NumberSequence {
         double avg = average();
 
         for (int i : numberList) {
-            if (Math.abs(i - avg) <= value) {
+            if (Math.abs(avg - i) <= value) {
                 result.add(i);
             }
         }
@@ -40,6 +43,13 @@ public class NumberSequence {
         for (int i : numberList) {
             sum += i;
         }
-        return sum;
+        return sum/numberList.size();
+    }
+
+    public static void main(String[] args) {
+        NumberSequence numberSequence = new NumberSequence(15,5,90);
+        System.out.println(numberSequence.getNumberList());
+        System.out.println(numberSequence.closeToAverage(10));
+
     }
 }
